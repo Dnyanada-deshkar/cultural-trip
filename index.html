@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CulturaTrip – Cultural Travel Planner</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>CulturaTrip</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="pages/saved.html">Saved Trips</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Plan Your Cultural Trip</h2>
+    <p>AI-powered cultural-first travel planning</p>
+  </section>
+
+  <section class="form-section">
+    <form id="tripForm">
+      <input type="text" id="city" placeholder="Destination City" required />
+
+      <input type="number" id="days" placeholder="Number of Days" min="1" required />
+
+      <div class="interest-selection">
+        <h3>Choose Your Cultural Interests</h3>
+        <div class="interest-grid">
+          <div class="interest-card">
+            <img src="images/food.jpeg" alt="Food" />
+            <div class="interest-info">
+              <h4>🍽️ Food</h4>
+              <p>Local cuisine & culinary experiences</p>
+              <label class="checkbox-label">
+                <input type="checkbox" value="food">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="interest-card">
+            <img src="images/history.jpeg" alt="History" />
+            <div class="interest-info">
+              <h4>🏛️ History</h4>
+              <p>Heritage sites & historical landmarks</p>
+              <label class="checkbox-label">
+                <input type="checkbox" value="history">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="interest-card">
+            <img src="images/art.jpeg" alt="Art" />
+            <div class="interest-info">
+              <h4>🎨 Art</h4>
+              <p>Galleries, museums & local artistry</p>
+              <label class="checkbox-label">
+                <input type="checkbox" value="art">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="interest-card">
+            <img src="images/nature.jpeg" alt="Nature" />
+            <div class="interest-info">
+              <h4>🌿 Nature</h4>
+              <p>Natural beauty & eco-cultural sites</p>
+              <label class="checkbox-label">
+                <input type="checkbox" value="nature">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="interest-card">
+            <img src="images/local.jpeg" alt="Local Life" />
+            <div class="interest-info">
+              <h4>🏘️ Local Life</h4>
+              <p>Community & daily cultural experiences</p>
+              <label class="checkbox-label">
+                <input type="checkbox" value="local life">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <select id="budget">
+        <option value="low">Low Budget</option>
+        <option value="medium">Medium Budget</option>
+        <option value="high">High Budget</option>
+      </select>
+
+      <button type="submit">Generate Cultural Trip</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2026 CulturaTrip</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function scrollToForm() {
+      document.getElementById('tripForm').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Handle interest card selection - robust approach with debugging
+    function initializeInterestCards() {
+      const interestCards = document.querySelectorAll('.interest-card');
+      console.log('Found interest cards:', interestCards.length);
+      
+      interestCards.forEach((card, index) => {
+        console.log('Initializing card:', index, card);
+        
+        // Remove any existing listeners to prevent duplicates
+        card.removeEventListener('click', handleCardClick);
+        // Add new listener
+        card.addEventListener('click', handleCardClick);
+        
+        // Also add listener to checkbox itself
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        if (checkbox) {
+          checkbox.removeEventListener('change', handleCheckboxChange);
+          checkbox.addEventListener('change', handleCheckboxChange);
+          
+          // Initialize card state based on checkbox
+          if (checkbox.checked) {
+            card.classList.add('selected');
+            console.log('Card', index, 'is initially selected');
+          }
+        }
+      });
+    }
+    
+    function handleCardClick(e) {
+      console.log('Card clicked:', e.target);
+      
+      // Find the checkbox within the clicked card
+      const checkbox = this.querySelector('input[type="checkbox"]');
+      if (!checkbox) {
+        console.log('No checkbox found in card');
+        return;
+      }
+      
+      console.log('Checkbox found, current state:', checkbox.checked);
+      
+      // Toggle the checkbox
+      checkbox.checked = !checkbox.checked;
+      console.log('Checkbox toggled to:', checkbox.checked);
+      
+      // Update visual state
+      updateCardState(this, checkbox.checked);
+      
+      // Trigger change event
+      checkbox.dispatchEvent(new Event('change'));
+    }
+    
+    function handleCheckboxChange(e) {
+      console.log('Checkbox changed:', e.target.checked);
+      const card = e.target.closest('.interest-card');
+      if (card) {
+        updateCardState(card, e.target.checked);
+      }
+    }
+    
+    function updateCardState(card, isChecked) {
+      console.log('Updating card state:', isChecked);
+      if (isChecked) {
+        card.classList.add('selected');
+      } else {
+        card.classList.remove('selected');
+      }
+    }
+    
+    // Multiple initialization attempts to ensure it works
+    function tryInitialize() {
+      console.log('Attempting to initialize interest cards...');
+      const cards = document.querySelectorAll('.interest-card');
+      if (cards.length > 0) {
+        initializeInterestCards();
+        console.log('Interest cards initialized successfully');
+      } else {
+        console.log('No interest cards found, retrying...');
+        setTimeout(tryInitialize, 500);
+      }
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryInitialize);
+    } else {
+      // DOM is already loaded
+      tryInitialize();
+    }
+    
+    // Also initialize after a short delay to ensure everything is loaded
+    setTimeout(tryInitialize, 100);
+    setTimeout(tryInitialize, 500);
+  </script>
+</body>
+</html>

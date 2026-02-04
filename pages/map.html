@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Map Explorer - CulturaTrip</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <style>
+    #map {
+      height: calc(100vh - 200px);
+      width: 100%;
+      margin: 20px 0;
+    }
+    .map-controls {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      margin: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(45, 74, 45, 0.1);
+    }
+    .map-controls button {
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CulturaTrip</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="saved.html">Saved Trips</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Explore Your Destination</h2>
+    <p>Interactive map with satellite view and cultural landmarks</p>
+  </section>
+
+  <div class="map-controls">
+    <button onclick="toggleSatellite()">🛰️ Toggle Satellite</button>
+    <button onclick="addCulturalMarkers()">🏛️ Show Cultural Sites</button>
+    <button onclick="resetView()">🎯 Reset View</button>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="actions">
+    <button onclick="location.href='plan.html'">← Back to Plan</button>
+    <button onclick="location.href='culture.html'">View Culture Info</button>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script src="../js/map.js"></script>
+</body>
+</html>

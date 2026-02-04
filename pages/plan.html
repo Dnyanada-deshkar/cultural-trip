@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cultural Plan</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header>
+  <h1>Your AI Cultural Itinerary</h1>
+</header>
+
+<section class="hero" style="padding: 40px 20px;">
+  <div id="tripDetails" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; margin-bottom: 20px;"></div>
+</section>
+
+<div id="planContainer" class="grid"></div>
+
+<div class="actions">
+  <button onclick="location.href='culture.html'">View Culture Info</button>
+  <button onclick="location.href='map.html'">View Map</button>
+  <button id="saveBtn">Save Trip</button>
+  <button onclick="location.href='../index.html'" style="background: linear-gradient(45deg, #95a5a6, #7f8c8d);">Plan New Trip</button>
+</div>
+
+<script src="../js/ai.js"></script>
+<script src="../js/storage.js"></script>
+<script>
+// Display trip details
+const data = JSON.parse(localStorage.getItem("tripData"));
+if (data) {
+  const detailsDiv = document.getElementById("tripDetails");
+  detailsDiv.innerHTML = `
+    <h3 style="color: white; margin-top: 0;">📍 ${data.city || 'Your Destination'}</h3>
+    <p style="color: white; margin: 5px 0;">📅 ${data.days} Days | 💰 ${data.budget.charAt(0).toUpperCase() + data.budget.slice(1)} Budget</p>
+    <p style="color: white; margin: 5px 0;">🎯 Interests: ${data.interests ? data.interests.join(', ') : 'Not specified'}</p>
+  `;
+}
+</script>
+</body>
+</html>

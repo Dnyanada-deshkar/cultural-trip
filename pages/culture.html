@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Culture Info - CulturaTrip</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .culture-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(45, 74, 45, 0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .culture-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(45, 74, 45, 0.2);
+    }
+    
+    .culture-card h3 {
+      color: #4a7c4a;
+      margin-top: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .culture-card .icon {
+      font-size: 1.8rem;
+    }
+    
+    .culture-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    
+    .culture-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(74, 124, 74, 0.1);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .culture-list li:hover {
+      background: rgba(74, 124, 74, 0.05);
+      padding-left: 10px;
+      border-radius: 8px;
+    }
+    
+    .culture-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .culture-list .bullet {
+      color: #4a7c4a;
+      font-weight: bold;
+      font-size: 1.1rem;
+      min-width: 20px;
+    }
+    
+    .culture-list .content {
+      flex: 1;
+      line-height: 1.6;
+      color: #2d4a2d;
+    }
+    
+    .culture-list .highlight {
+      background: rgba(74, 124, 74, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    
+    .tip-box {
+      background: linear-gradient(135deg, rgba(74, 124, 74, 0.1), rgba(107, 155, 107, 0.1));
+      border-left: 4px solid #4a7c4a;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    
+    .tip-box strong {
+      color: #4a7c4a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CulturaTrip</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="saved.html">Saved Trips</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Cultural Insights</h2>
+    <p>Essential tips and cultural information for your journey</p>
+  </section>
+
+  <div id="cultureData" class="culture-grid"></div>
+
+  <div class="actions">
+    <button onclick="location.href='plan.html'">← Back to Plan</button>
+    <button onclick="location.href='map.html'">View Map</button>
+  </div>
+
+  <script src="../js/culture.js"></script>
+</body>
+</html>
